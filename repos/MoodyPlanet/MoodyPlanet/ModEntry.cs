@@ -130,7 +130,7 @@ namespace MoodyPlanet
         public void rem_mons()
         {
 
-            if (x == 3 && z > 42) //Angry
+            if (x == 3 && z > 42) //Angry penis
             {
 
 
