@@ -1,0 +1,6 @@
+C:\Users\Daniel\source\repos\FreshGUI\FreshGUI\bin\Debug\FreshGUI.dll
+C:\Users\Daniel\source\repos\FreshGUI\FreshGUI\bin\Debug\FreshGUI.pdb
+C:\Users\Daniel\source\repos\FreshGUI\FreshGUI\obj\Debug\FreshGUI.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\source\repos\FreshGUI\FreshGUI\obj\Debug\FreshGUI.dll
+C:\Users\Daniel\source\repos\FreshGUI\FreshGUI\obj\Debug\FreshGUI.pdb
+C:\Users\Daniel\source\repos\FreshGUI\FreshGUI\obj\Debug\FreshGUI.csprojAssemblyReference.cache

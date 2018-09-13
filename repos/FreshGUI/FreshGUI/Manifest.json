@@ -1,0 +1,13 @@
+﻿{
+   "Name": "FreshGUI",
+   "Author": "Daniel_McMenamy",
+   "Version": {
+      "MajorVersion": 1,
+      "MinorVersion": 0,
+      "PatchVersion": 0,
+      "Build": null
+   },
+   "Description": "The freshest Inventory available at your local corner store. Now starting at $19.95!!",
+   "UniqueID": "f1r3w477.FreshGUI",
+   "EntryDll": "FreshGUI.dll"
+}
