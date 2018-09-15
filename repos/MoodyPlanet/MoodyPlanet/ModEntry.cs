@@ -34,6 +34,8 @@ namespace MoodyPlanet
         string mood;
         LEModApi api;
 
+    
+
         public override void Entry(IModHelper helper)
         {
             instance = this;
@@ -58,7 +60,6 @@ namespace MoodyPlanet
         {
             if (this.Helper.ModRegistry.IsLoaded("DevinLematty.LevelExtender"))
             {
-
                 api = this.Helper.ModRegistry.GetApi<LEModApi>("DevinLematty.LevelExtender");
             }
 
@@ -121,16 +122,16 @@ namespace MoodyPlanet
                 }
             }
 
-            foreach (int mhash in hashofm)
+            /* foreach (int mhash in hashofm)
             {
-                //Monitor.Log($"--Hashes-->{mhash.ToString()}");
+                Monitor.Log($"--Hashes-->{mhash.ToString()}");
             }
-
+            */
         }
         public void rem_mons()
         {
 
-            if (x == 3 && z > 42) //Angry penis
+            if (x == 3 && z > 42) //Angry
             {
 
 
@@ -204,8 +205,8 @@ namespace MoodyPlanet
             if (x == 7 && z > 60) //Mysterious
             {
                 double rnd = wnd.Next(0, 13);
-                rnd = rnd / 100.0; // :)
-                api.spawn_rate(rnd); // Cx
+                rnd = rnd / 1000.0;
+                api.Spawn_Rate(rnd);
 
 
                 foreach (NPC m in Game1.player.currentLocation.characters.OfType<NPC>())
@@ -299,10 +300,10 @@ namespace MoodyPlanet
                 x6 = wnd.Next(1, 2);
                 z = wnd.Next(1, 100);
                 // 1 - Happy | 2 - Sad | 3 - Angry | 4 - Enlightened | 5 - Moody | 6 - Depressed | 7 - Elated | 8 - Dying | 9 - Furious
-                if (x == 1 && z > 17)
+                if (x == 1 && z > 13 && z < 69)
                 {
                     mood = "Happy";
-                    Monitor.Log("-MOODY--PLANET-> World Mood : Happy <--DEBUG--");
+                    Monitor.Log($"-MOODY--PLANET-> World Mood : {mood} <--DEBUG--");
                     HUDMessage message = new HUDMessage($"The world is Happy today!");
                     message.color = new Color(218, 165, 32);
                     Game1.addHUDMessage(message);
@@ -314,10 +315,25 @@ namespace MoodyPlanet
                     message.update(Game1.currentGameTime);
 
                 }
-                else if (x == 1 && z < 17)
+                else if (x == 1 && z > 68)
                 {
-                    mood = "Satisfied";
-                    Monitor.Log("-MOODY--PLANET-> World Mood : Satisfied <--DEBUG--");
+                    mood = "Content";
+                    Monitor.Log($"-MOODY--PLANET-> World Mood : {mood} <--DEBUG--");
+                    HUDMessage message = new HUDMessage($"The world is Satisfied today!");
+                    message.color = new Color(218, 165, 32);
+                    Game1.addHUDMessage(message);
+
+
+                    message.timeLeft += 7000.0f;
+                    message.noIcon = true;
+
+                    message.update(Game1.currentGameTime);
+
+                }
+                else if (x == 1 && z < 14)
+                {
+                    mood = "Untroubled";
+                    Monitor.Log($"-MOODY--PLANET-> World Mood : {mood} <--DEBUG--");
                     HUDMessage message = new HUDMessage($"The world is Satisfied today!");
                     message.color = new Color(218, 165, 32);
                     Game1.addHUDMessage(message);
@@ -332,7 +348,7 @@ namespace MoodyPlanet
                 else if (x == 2 && z > 17)
                 {
                     mood = "sad";
-                    Monitor.Log("-MOODY--PLANET-> World Mood : Sad <--DEBUG--");
+                    Monitor.Log($"-MOODY--PLANET-> World Mood : {mood} <--DEBUG--");
                     HUDMessage message = new HUDMessage($"The world is Sad today!");
                     message.color = new Color(218, 165, 32);
                     Game1.addHUDMessage(message);
@@ -345,7 +361,7 @@ namespace MoodyPlanet
                 }
                 else if (x == 2 && z < 17)
                 {
-                    Monitor.Log("-MOODY--PLANET-> World Mood : Sad <--DEBUG--");
+                    Monitor.Log($"-MOODY--PLANET-> World Mood : {mood} <--DEBUG--");
                     HUDMessage message = new HUDMessage($"The world is Sad today!");
                     message.color = new Color(218, 165, 32);
                     Game1.addHUDMessage(message);
@@ -358,8 +374,8 @@ namespace MoodyPlanet
                 }
                 else if (x == 3 && z > 42)
                 {
-                
-                    Monitor.Log("-MOODY--PLANET-> World Mood : Angry <--DEBUG--");
+
+                    Monitor.Log($"-MOODY--PLANET-> World Mood : {mood} <--DEBUG--");
                     HUDMessage message = new HUDMessage($"The world is Angry today!");
                     message.color = new Color(218, 165, 32);
                     Game1.addHUDMessage(message);
@@ -372,8 +388,8 @@ namespace MoodyPlanet
                 }
                 else if (x == 4 && z > 83)
                 {
-               
-                    Monitor.Log("-MOODY--PLANET-> World Mood : Enlightened <--DEBUG--");
+
+                    Monitor.Log($"-MOODY--PLANET-> World Mood : {mood} <--DEBUG--");
                     HUDMessage message = new HUDMessage($"The world is Enlightened today!");
                     message.color = new Color(218, 165, 32);
                     Game1.addHUDMessage(message);
@@ -386,8 +402,8 @@ namespace MoodyPlanet
                 }
                 else if (x == 5 && z > 30)
                 {
-               
-                    Monitor.Log("-MOODY--PLANET-> World Mood : Moody <--DEBUG--");
+
+                    Monitor.Log($"-MOODY--PLANET-> World Mood : {mood} <--DEBUG--");
                     HUDMessage message = new HUDMessage($"The world is Moody today!");
                     message.color = new Color(218, 165, 32);
                     Game1.addHUDMessage(message);
@@ -400,8 +416,8 @@ namespace MoodyPlanet
                 }
                 else if (x == 6 && z > 63)
                 {
-                
-                    Monitor.Log("-MOODY--PLANET-> World Mood : Depressed <--DEBUG--");
+
+                    Monitor.Log($"-MOODY--PLANET-> World Mood : {mood} <--DEBUG--");
                     HUDMessage message = new HUDMessage($"The world is Depressed today!");
                     message.color = new Color(218, 165, 32);
                     Game1.addHUDMessage(message);
@@ -414,8 +430,8 @@ namespace MoodyPlanet
                 }
                 else if (x == 7 && z > 60)
                 {
-               
-                    Monitor.Log("-MOODY--PLANET-> World Mood : Mysterious <--DEBUG--");
+
+                    Monitor.Log($"-MOODY--PLANET-> World Mood : {mood} <--DEBUG--");
                     HUDMessage message = new HUDMessage($"The world is Mysterious today!");
                     message.color = new Color(218, 165, 32);
                     Game1.addHUDMessage(message);
@@ -427,8 +443,8 @@ namespace MoodyPlanet
                 }
                 else if (x == 8)
                 {
-               
-                    Monitor.Log("-MOODY--PLANET-> World Mood : Decaying <--DEBUG--");
+
+                    Monitor.Log($"-MOODY--PLANET-> World Mood : {mood} <--DEBUG--");
                     HUDMessage message = new HUDMessage($"The world is Decaying today!");
                     message.color = new Color(218, 165, 32);
                     Game1.addHUDMessage(message);
@@ -440,8 +456,8 @@ namespace MoodyPlanet
                 }
                 else if (x == 9)
                 {
-              
-                    Monitor.Log("-MOODY--PLANET-> World Mood : Happy <--DEBUG--");
+
+                    Monitor.Log($"-MOODY--PLANET-> World Mood : {mood} <--DEBUG--");
                     HUDMessage message = new HUDMessage($"The world is Happy today!");
                     message.color = new Color(218, 165, 32);
                     Game1.addHUDMessage(message);
@@ -454,7 +470,7 @@ namespace MoodyPlanet
                 else if (x == 9)
                 {
 
-                    Monitor.Log("-MOODY--PLANET-> World Mood : Elated <--DEBUG--");
+                    Monitor.Log($"-MOODY--PLANET-> World Mood : {mood} <--DEBUG--");
                     HUDMessage message = new HUDMessage($"The world is Happy today!");
                     message.color = new Color(218, 165, 32);
                     Game1.addHUDMessage(message);
@@ -467,7 +483,7 @@ namespace MoodyPlanet
                 else if (x == 9)
                 {
 
-                    Monitor.Log("-MOODY--PLANET-> World Mood : High AF <--DEBUG--");
+                    Monitor.Log($"-MOODY--PLANET-> World Mood : {mood} <--DEBUG--");
                     HUDMessage message = new HUDMessage($"The world is Happy today!");
                     message.color = new Color(218, 165, 32);
                     Game1.addHUDMessage(message);
@@ -479,8 +495,8 @@ namespace MoodyPlanet
                 }
                 else if (x == 10 && z > 77)
                 {
-              
-                    Monitor.Log("-MOODY--PLANET-> World Mood : Furious <--DEBUG--");
+
+                    Monitor.Log($"-MOODY--PLANET-> World Mood : {mood} <--DEBUG--");
                     HUDMessage message = new HUDMessage($"The world is Furious today!");
                     message.color = new Color(218, 165, 32);
                     Game1.addHUDMessage(message);
@@ -492,7 +508,7 @@ namespace MoodyPlanet
                 }
                 else if (x == 10 && z > 42 && z < 78)
                 {
-                    Monitor.Log("-MOODY--PLANET-> World Mood : Agressive <--DEBUG--");
+                    Monitor.Log($"-MOODY--PLANET-> World Mood : {mood} <--DEBUG--");
                     HUDMessage message = new HUDMessage($"The world is Aggressive today!");
                     message.color = new Color(218, 165, 32);
                     Game1.addHUDMessage(message);
@@ -504,7 +520,7 @@ namespace MoodyPlanet
                 }
                 else if (x == 10 && z < 43)
                 {
-                    Monitor.Log("-MOODY--PLANET-> World Mood : Agressive <--DEBUG--");
+                    Monitor.Log($"-MOODY--PLANET-> World Mood : {mood} <--DEBUG--");
                     HUDMessage message = new HUDMessage($"The world is Slightly Agitated today!");
                     message.color = new Color(218, 165, 32);
                     Game1.addHUDMessage(message);
@@ -514,9 +530,9 @@ namespace MoodyPlanet
 
                     message.update(Game1.currentGameTime);
                 }
-                else if (x > 10 || z < 17)
+                else if (x > 10)
                 {
-                    Monitor.Log("-MOODY--PLANET-> World Mood : Normal <--DEBUG--");
+                    Monitor.Log($"-MOODY--PLANET-> World Mood : {mood} <--DEBUG--");
                     HUDMessage message = new HUDMessage($"The world is Normal today!");
                     message.color = new Color(218, 165, 32);
                     Game1.addHUDMessage(message);

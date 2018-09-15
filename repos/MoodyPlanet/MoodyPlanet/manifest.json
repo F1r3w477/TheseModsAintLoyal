@@ -4,5 +4,13 @@
   "Version": "1.0.0",
   "Description": "The world has feelings too, you know.",
   "UniqueID": "f1r3w477.Level_Extender",
-  "EntryDll": "moodyplanet.dll"
+  "EntryDll": "moodyplanet.dll",
+  "MinimumApiVersion": "2.7",
+  "Dependencies": [
+    {
+      "UniqueID": "DevinLematty.LevelExtender",
+      "IsRequired": true
+
+    }
+  ]
 }
