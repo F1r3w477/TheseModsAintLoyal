@@ -287,21 +287,21 @@ namespace MoodyPlanet
                 }
                 else if (mood == "Cryptic")
                 {
-                    he = wnd.NextDouble() + wnd.Next(1, 4);
-                    res = wnd.NextDouble() + wnd.Next(1, 4);
-                    sl = wnd.NextDouble() + wnd.Next(1, 4);
-                    exp = wnd.NextDouble() + wnd.Next(1, 4);
-                    sc = wnd.NextDouble() + wnd.Next(1, 4);
-                    sp = wnd.NextDouble() + wnd.Next(1, 4);
+                    he = wnd.NextDouble() * 4;
+                    res = wnd.NextDouble() * 4;
+                    sl = wnd.NextDouble() * 4;
+                    exp = wnd.NextDouble() * 4;
+                    sc = wnd.NextDouble() * 4;
+                    sp = wnd.NextDouble() * 4;
                 }
                 else if (mood == "Unexplainable")
                 {
-                    he = wnd.NextDouble() + wnd.Next(1, 6);
-                    res = wnd.NextDouble() + wnd.Next(1, 6);
-                    sl = wnd.NextDouble() + wnd.Next(1, 6);
-                    exp = wnd.NextDouble() + wnd.Next(1, 6);
-                    sc = wnd.NextDouble() + wnd.Next(1, 6);
-                    sp = wnd.NextDouble() + wnd.Next(1, 6);
+                    he = wnd.NextDouble() * 6;
+                    res = wnd.NextDouble() * 6;
+                    sl = wnd.NextDouble() * 6;
+                    exp = wnd.NextDouble() * 6;
+                    sc = wnd.NextDouble() * 6;
+                    sp = wnd.NextDouble() * 6;
                 }
                 else if (mood == "Arrogant")
                 {
