@@ -33,7 +33,7 @@ namespace MoodyPlanet
         string mood;
         LEModApi api;
         public double[] CMS;
-
+        bool mpdebug;
 
 
         public override void Entry(IModHelper helper)
@@ -42,7 +42,7 @@ namespace MoodyPlanet
             hashofm = new List<int>();
             blackhash = new List<int>();
             wnd = new Random();
-
+            mpdebug = false;
 
             TimeEvents.AfterDayStarted += TimeEvents_AfterDayStarted;
             GameEvents.OneSecondTick += GameEvents_OneSecondTick;
@@ -51,9 +51,25 @@ namespace MoodyPlanet
             helper.ConsoleCommands.Add("mood", "Tells player world mood.", this.tellMood);
             helper.ConsoleCommands.Add("moodmultis", "Tells player world MoodMultipliers.", this.tellMultipliers);
             helper.ConsoleCommands.Add("mm", "Tells player world MoodMultipliers.", this.tellMultipliers);
+            helper.ConsoleCommands.Add("mpdebug", "Tells player world MoodMultipliers.", this.MPDebug);
 
+
+
+        }
+
+        private void MPDebug(string arg1, string[] arg2)
+        {
+            if (mpdebug)
+            {
+                mpdebug = false;
+                Monitor.Log("-MOODY--PLANET-> Debug Turned Off. <--DEBUG--");
+            }
+            else if (!mpdebug)
+            {
+                mpdebug = true;
+                Monitor.Log("-MOODY--PLANET-> Debug Turned On. <--DEBUG--");
+            }
             
-
         }
 
         private void tellMultipliers(string arg1, string[] arg2)
@@ -262,30 +278,30 @@ namespace MoodyPlanet
                 }
                 else if (mood == "Mysterious")
                 {
-                    he = wnd.Next(1, 2);
-                    res = wnd.Next(1, 2);
-                    sl = wnd.Next(1, 2);
-                    exp = wnd.Next(1, 2);
-                    sc = wnd.Next(1, 2);
-                    sp = wnd.Next(1, 2);
+                    he = wnd.NextDouble() +1.0;
+                    res = wnd.NextDouble() + 1.0;
+                    sl = wnd.NextDouble() + 1.0;
+                    exp = wnd.NextDouble() + 1.0;
+                    sc = wnd.NextDouble() + 1.0;
+                    sp = wnd.NextDouble() + 1.0;
                 }
                 else if (mood == "Cryptic")
                 {
-                    he = wnd.Next(1, 4);
-                    res = wnd.Next(1, 4);
-                    sl = wnd.Next(1, 4);
-                    exp = wnd.Next(1, 4);
-                    sc = wnd.Next(1, 4);
-                    sp = wnd.Next(1, 4);
+                    he = wnd.NextDouble() + wnd.Next(1, 4);
+                    res = wnd.NextDouble() + wnd.Next(1, 4);
+                    sl = wnd.NextDouble() + wnd.Next(1, 4);
+                    exp = wnd.NextDouble() + wnd.Next(1, 4);
+                    sc = wnd.NextDouble() + wnd.Next(1, 4);
+                    sp = wnd.NextDouble() + wnd.Next(1, 4);
                 }
                 else if (mood == "Unexplainable")
                 {
-                    he = wnd.Next(1, 6);
-                    res = wnd.Next(1, 6);
-                    sl = wnd.Next(1, 6);
-                    exp = wnd.Next(1, 6);
-                    sc = wnd.Next(1, 6);
-                    sp = wnd.Next(1, 6);
+                    he = wnd.NextDouble() + wnd.Next(1, 6);
+                    res = wnd.NextDouble() + wnd.Next(1, 6);
+                    sl = wnd.NextDouble() + wnd.Next(1, 6);
+                    exp = wnd.NextDouble() + wnd.Next(1, 6);
+                    sc = wnd.NextDouble() + wnd.Next(1, 6);
+                    sp = wnd.NextDouble() + wnd.Next(1, 6);
                 }
                 else if (mood == "Arrogant")
                 {
@@ -377,34 +393,46 @@ namespace MoodyPlanet
                 if (x == 1 && z == 1 && b == 1 && a == 1)
                 {
                     mood = "Holy shit just sleep again.";
+                    double rnd = wnd.Next(40, 1000);
+                    rnd = rnd / 1000.0;
+                    api.Spawn_Rate(rnd);
                 }
                 if (x == 1 && z > 13 && z < 88)
                 {
                     mood = "Happy";
+                    Game1.player.Stamina = (int)(Game1.player.Stamina * 1.1);
+                    Game1.player.health = (int)(Game1.player.health * 1.1);
                 }
                 else if (x == 1 && z > 87)
                 {
                     mood = "Content";
+                    Game1.player.Stamina = (int)(Game1.player.Stamina * 1.1);
+                    Game1.player.health = (int)(Game1.player.health * 1.2);
 
                 }
                 else if (x == 1 && z < 14)
                 {
                     mood = "Untroubled";
+                    Game1.player.Stamina = (int)(Game1.player.Stamina * 1.25);
+                    Game1.player.health = (int)(Game1.player.health * 1.5);
                 }
                 else if (x == 2 && z > 13 && z < 88)
                 {
                     mood = "Sad";
+                    Game1.player.Stamina = (int)(Game1.player.Stamina * .9);
                 }
                 else if (x == 2 && z < 14)
                 {
                     mood = "Gloomy";
+                    Game1.player.Stamina = (int)(Game1.player.Stamina * .75);
+                    Game1.player.health = (int)(Game1.player.health * .9);
                 }
 
                 else if (x == 2 && z > 87)
                 {
                     mood = "Depressed";
                     Game1.player.Stamina = (int)(Game1.player.Stamina * .5);
-                    Game1.player.health = (int)(Game1.player.health * .9);
+                    Game1.player.health = (int)(Game1.player.health * .8);
                 }
                 else if (x == 3 && z > 13 && z < 88)
                 {
@@ -471,17 +499,23 @@ namespace MoodyPlanet
                 else if (x == 8 && z > 13 && z < 88)
                 {
                     mood = "Mysterious";
-                    double rnd = wnd.Next(0, 13);
+                    double rnd = wnd.Next(0, 10);
                     rnd = rnd / 1000.0;
                     api.Spawn_Rate(rnd);
                 }
                 else if (x == 8 && z > 87)
                 {
                     mood = "Cryptic";
+                    double rnd = wnd.Next(0, 23);
+                    rnd = rnd / 1000.0;
+                    api.Spawn_Rate(rnd);
                 }
                 else if (x == 8 && z < 14)
                 {
                     mood = "Unexplainable";
+                    double rnd = wnd.Next(0, 33);
+                    rnd = rnd / 1000.0;
+                    api.Spawn_Rate(rnd);
                 }
                 else if (x == 9 && z > 13 && z < 88)
                 {
@@ -507,6 +541,9 @@ namespace MoodyPlanet
                 else if (x == 10)
                 {
                     mood = "Insane";
+                    double rnd = wnd.Next(10, 45);
+                    rnd = rnd / 1000.0;
+                    api.Spawn_Rate(rnd);
                 }
                 else if (x > 10)
                 {
@@ -538,7 +575,8 @@ namespace MoodyPlanet
             {
                 hashofm.RemoveRange(0, hashofm.Count);
                 blackhash.RemoveRange(0, blackhash.Count);
-                Monitor.Log($"Removed Monsters from List {blackhash.Count}, {hashofm.Count} ");
+                if (mpdebug)
+                Monitor.Log($"-MOODY--PLANET->Removed Monsters from List ||| {blackhash.Count}, |/| {hashofm.Count} |||<--DEBUG--");
             }
         }
 
@@ -609,7 +647,8 @@ namespace MoodyPlanet
                     H.Speed = (int)(H.Speed * CMS[5]);
                     blackhash.Add(m.GetHashCode());
                     hashofm.Remove(m.GetHashCode());
-                    Monitor.Log("-MOODY--PLANET-> Applied status changes to monsters in this location. <--DEBUG--");
+                    if (mpdebug)
+                        Monitor.Log("-MOODY--PLANET-> Applied status changes to monsters in this location. <--DEBUG--");
                 }
             }
 
@@ -618,8 +657,11 @@ namespace MoodyPlanet
 
         public void DisplayMood()
         {
-            Monitor.Log($"-MOODY--PLANET-> World Multis : Health: {CMS[0]}, Resilience: {CMS[1]}, Slipperiness: {CMS[2]}, ExperienceGained(All Skills): {CMS[3]}, Scale: {CMS[4]}, Speed: {CMS[5]}  <--DEBUG--");
-            Monitor.Log($"-MOODY--PLANET-> World Mood : {mood} <--DEBUG--");
+            if (mpdebug)
+            {
+                Monitor.Log($"-MOODY--PLANET-> World Multis : Health: {CMS[0]}, Resilience: {CMS[1]}, Slipperiness: {CMS[2]}, ExperienceGained(All Skills): {CMS[3]}, Scale: {CMS[4]}, Speed: {CMS[5]}  <--DEBUG--");
+                Monitor.Log($"-MOODY--PLANET-> World Mood : {mood} <--DEBUG--");
+            }
             HUDMessage message = new HUDMessage($"The world is {mood} today!");
             message.color = new Color(218, 165, 32);
             Game1.addHUDMessage(message);
