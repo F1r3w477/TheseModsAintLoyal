@@ -309,7 +309,7 @@ namespace MoodyPlanet
                     message.color = new Color(218, 165, 32);
                     Game1.addHUDMessage(message);
 
-
+                    
                     message.timeLeft += 7000.0f;
                     message.noIcon = true;
 
