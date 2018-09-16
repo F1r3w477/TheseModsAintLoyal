@@ -366,7 +366,7 @@ namespace MoodyPlanet
                     sc = 3.0;
                     sp = 3.0;
                 }
-                else if (mood == "Holy shit just sleep again.")
+                else if (mood == "Normal")
                 {
                     he = 1.0;
                     res = 1.0;
