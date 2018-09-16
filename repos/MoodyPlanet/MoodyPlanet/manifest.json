@@ -3,7 +3,7 @@
   "Author": "Daniel McMenamy",
   "Version": "1.0.0",
   "Description": "The world has feelings too, you know?",
-  "UniqueID": "f1r3w477.Level_Extender",
+  "UniqueID": "f1r3w477.MoodyPlanet",
   "EntryDll": "moodyplanet.dll",
   "MinimumApiVersion": "2.7",
   "Dependencies": [
