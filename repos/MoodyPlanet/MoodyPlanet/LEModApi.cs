@@ -8,7 +8,7 @@ namespace MoodyPlanet
 {
     public interface LEModApi
     {
-        void spawn_rate(double osr);
+        void Spawn_Rate(double osr);
     }
 }
 

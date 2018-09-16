@@ -3,3 +3,9 @@ C:\Users\Daniel\source\repos\MoodyPlanet\MoodyPlanet\bin\Debug\MoodyPlanet.pdb
 C:\Users\Daniel\source\repos\MoodyPlanet\MoodyPlanet\obj\Debug\MoodyPlanet.csproj.CoreCompileInputs.cache
 C:\Users\Daniel\source\repos\MoodyPlanet\MoodyPlanet\obj\Debug\MoodyPlanet.dll
 C:\Users\Daniel\source\repos\MoodyPlanet\MoodyPlanet\obj\Debug\MoodyPlanet.pdb
+C:\Users\Daniel\Documents\GitHub\TheseModsAintLoyal\repos\MoodyPlanet\MoodyPlanet\bin\Debug\MoodyPlanet.dll
+C:\Users\Daniel\Documents\GitHub\TheseModsAintLoyal\repos\MoodyPlanet\MoodyPlanet\bin\Debug\MoodyPlanet.pdb
+C:\Users\Daniel\Documents\GitHub\TheseModsAintLoyal\repos\MoodyPlanet\MoodyPlanet\obj\Debug\MoodyPlanet.csprojAssemblyReference.cache
+C:\Users\Daniel\Documents\GitHub\TheseModsAintLoyal\repos\MoodyPlanet\MoodyPlanet\obj\Debug\MoodyPlanet.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\Documents\GitHub\TheseModsAintLoyal\repos\MoodyPlanet\MoodyPlanet\obj\Debug\MoodyPlanet.dll
+C:\Users\Daniel\Documents\GitHub\TheseModsAintLoyal\repos\MoodyPlanet\MoodyPlanet\obj\Debug\MoodyPlanet.pdb
