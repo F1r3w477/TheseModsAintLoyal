@@ -26,10 +26,7 @@ namespace MoodyPlanet
     {
         public static Mod instance;
         public static Random wnd;
-        int x; //becomes random 
-        int z; //becomes random variable
-        int a; //becomes random variable
-        int b; //becomes random variable
+        int x, z, a, b; //becomes random 
         int alpha = -1;
         List<int> hashofm;
         List<int> blackhash;
@@ -37,12 +34,11 @@ namespace MoodyPlanet
         LEModApi api;
         public double[] CMS;
 
-    
+
 
         public override void Entry(IModHelper helper)
         {
             instance = this;
-            wnd = new Random();
             hashofm = new List<int>();
             blackhash = new List<int>();
 
@@ -52,17 +48,18 @@ namespace MoodyPlanet
             TimeEvents.AfterDayStarted += TimeEvents_AfterDayStarted1;
             GameEvents.FirstUpdateTick += GameEvents_FirstUpdateTick;
             helper.ConsoleCommands.Add("mood", "Tells player world mood.", this.tellMood);
+            helper.ConsoleCommands.Add("moodmultis", "Tells player world MoodMultipliers.", this.tellMultipliers);
+            helper.ConsoleCommands.Add("mm", "Tells player world MoodMultipliers.", this.tellMultipliers);
 
+            ModConfig config = helper.ReadConfig<ModConfig>();
+            wnd = new Random(config.seed);
+            Monitor.Log("Seed loaded.");
 
+        }
 
-
-           /* H.Health
-            H.resilience.Value
-            H.Slipperiness
-            H.ExperienceGained 
-            H.Scale
-            H.Speed */
-
+        private void tellMultipliers(string arg1, string[] arg2)
+        {
+            Monitor.Log($"Health: {CMS[0]}, Resilience: {CMS[1]}, Slipperiness: {CMS[2]}, ExperienceGained(All Skills): {CMS[3]}, Scale: {CMS[4]}, Speed: {CMS[5]} ");
         }
 
         public double[] MoodMultis
@@ -354,6 +351,15 @@ namespace MoodyPlanet
                     sc = 3.0;
                     sp = 3.0;
                 }
+                else if (mood == "Holy shit just sleep again.")
+                {
+                    he = 1.0;
+                    res = 1.0;
+                    sl = 1.0;
+                    exp = 1.0;
+                    sc = 1.0;
+                    sp = 1.0;
+                }
                 double[] nutty = { he, res, sl, exp, sc, sp };
                 return nutty;
             }
@@ -369,15 +375,15 @@ namespace MoodyPlanet
                 a = wnd.Next(1, 100);
                 b = wnd.Next(1, 100);
                 // 1 - Happy | 2 - Sad | 3 - Angry | 4 - Enlightened | 5 - Moody | 6 - Depressed | 7 - Elated | 8 - Dying | 9 - Furious
-                if(x == 1 && z == 1 && b == 1 && a == 1)
+                if (x == 1 && z == 1 && b == 1 && a == 1)
                 {
                     mood = "Holy shit just sleep again.";
                 }
-                if (x == 1 && z > 13 && z < 69)
+                if (x == 1 && z > 13 && z < 88)
                 {
                     mood = "Happy";
                 }
-                else if (x == 1 && z > 68)
+                else if (x == 1 && z > 87)
                 {
                     mood = "Content";
 
@@ -386,129 +392,133 @@ namespace MoodyPlanet
                 {
                     mood = "Untroubled";
                 }
-                else if (x == 2 && z > 17)
+                else if (x == 2 && z > 13 && z < 88)
                 {
                     mood = "Sad";
                 }
-                else if (x == 2 && z < 17)
+                else if (x == 2 && z < 14)
                 {
-                    mood = "Depressed";
+                    mood = "Gloomy";
                 }
 
-                else if (x == 3 && z > 42)
+                else if (x == 2 && z > 87)
                 {
                     mood = "Depressed";
                     Game1.player.Stamina = (int)(Game1.player.Stamina * .5);
                     Game1.player.health = (int)(Game1.player.health * .9);
                 }
-                else if (x == 4 && z > 83)
+                else if (x == 3 && z > 13 && z < 88)
                 {
-                    mood = "Depressed";
+                    mood = "Annoyed";
                 }
-                else if (x == 5 && z > 30)
+                else if (x == 3 && z > 87)
                 {
-                    mood = "Depressed";
+                    mood = "Angry";
                 }
-                else if (x == 6 && z > 63)
+                else if (x == 3 && z < 14)
                 {
-                    mood = "Depressed";
+                    mood = "Furious";
                 }
-                else if (x == 7 && z > 60)
+                else if (x == 4 && z > 13 && z < 88)
                 {
-                    mood = "Depressed";
+                    mood = "Mellow";
                 }
-                else if (x == 8)
+                else if (x == 4 && z > 87)
                 {
-                    mood = "Depressed";
+                    mood = "Serene";
                 }
-                else if (x == 9)
+                else if (x == 4 && z < 14)
                 {
                     mood = "Enlightened";
                     Game1.player.health = (int)(Game1.player.health * 1.15);
                     Game1.player.Stamina = (int)(Game1.player.Stamina * 1.25);
                 }
-                else if (x == 9)
+                else if (x == 5 && z > 13 && z < 88)
                 {
-                    mood = "Depressed";
+                    mood = "Indifferent";
                 }
-                else if (x == 9)
+                else if (x == 5 && z > 87)
                 {
-                    mood = "Depressed";
+                    mood = "Uncaring";
                 }
-                else if (x == 10 && z > 77)
+                else if (x == 5 && z < 14)
                 {
-                    mood = "Depressed";
+                    mood = "Uninterested";
                 }
-                else if (x == 10 && z > 42 && z < 78)
+                else if (x == 6 && z > 13 && z < 88)
                 {
-                    mood = "Depressed";
+                    mood = "Tired";
                 }
-                else if (x == 10 && z < 43)
+                else if (x == 6 && z > 87)
                 {
-                    mood = "Depressed";
+                    mood = "Restless";
                 }
-                else if (x > 10)
+                else if (x == 6 && z < 14)
                 {
-                    mood = "Depressed";
+                    mood = "Anxious";
                 }
-                else if (x > 10)
+                else if (x == 7 && z > 13 && z < 88)
                 {
-                    mood = "Depressed";
+                    mood = "Loved";
                 }
-                else if (x > 10)
+                else if (x == 7 && z > 87)
                 {
-                    mood = "Depressed";
+                    mood = "Cherished";
                 }
-                else if (x > 10)
+                else if (x == 7 && z < 14)
                 {
-                    mood = "Depressed";
+                    mood = "Adored";
                 }
-                else if (x > 10)
+                else if (x == 8 && z > 13 && z < 88)
                 {
                     mood = "Mysterious";
                     double rnd = wnd.Next(0, 13);
                     rnd = rnd / 1000.0;
                     api.Spawn_Rate(rnd);
                 }
-                else if (x > 10)
+                else if (x == 8 && z > 87)
                 {
-                    mood = "Depressed";
+                    mood = "Cryptic";
+                }
+                else if (x == 8 && z < 14)
+                {
+                    mood = "Unexplainable";
+                }
+                else if (x == 9 && z > 13 && z < 88)
+                {
+                    mood = "Arrogant";
+                }
+                else if (x == 9 && z > 87)
+                {
+                    mood = "Narcissistic";
+
+                }
+                else if (x == 9 && z < 14)
+                {
+                    mood = "Egotistical";
+                }
+                else if (x == 10 && z > 13 && z < 88)
+                {
+                    mood = "Crazy";
+                }
+                else if (x == 10 && z < 14)
+                {
+                    mood = "Irrational";
+                }
+                else if (x == 10)
+                {
+                    mood = "Insane";
                 }
                 else if (x > 10)
                 {
-                    mood = "Depressed";
-                }
-                else if (x > 10)
-                {
-                    mood = "Depressed";
-                }
-                else if (x > 10)
-                {
-                    mood = "Depressed";
-                    
-                }
-                else if (x > 10)
-                {
-                    mood = "Depressed";
-                }
-                else if (x > 10)
-                {
-                    mood = "Depressed";
-                }
-                else if (x > 10)
-                {
-                    mood = "Depressed";
-                }
-                else if (x > 10)
-                {
-                    mood = "Depressed";
+                    mood = "Normal";
                 }
                 CMS = MoodMultis;
                 DisplayMood();
             }
         }
 
-            private void GameEvents_FirstUpdateTick(object sender, EventArgs e)
+        private void GameEvents_FirstUpdateTick(object sender, EventArgs e)
         {
             if (this.Helper.ModRegistry.IsLoaded("DevinLematty.LevelExtender"))
             {
@@ -602,8 +612,8 @@ namespace MoodyPlanet
                     //Monitor.Log("-MOODY--PLANET-> Applied status changes to monsters in this location. <--DEBUG--");
                 }
             }
-           
-            
+
+
         }
 
         public void DisplayMood()
