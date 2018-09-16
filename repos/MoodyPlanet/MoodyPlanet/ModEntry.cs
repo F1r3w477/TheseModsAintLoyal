@@ -41,6 +41,7 @@ namespace MoodyPlanet
             instance = this;
             hashofm = new List<int>();
             blackhash = new List<int>();
+            wnd = new Random();
 
 
             TimeEvents.AfterDayStarted += TimeEvents_AfterDayStarted;
@@ -51,9 +52,7 @@ namespace MoodyPlanet
             helper.ConsoleCommands.Add("moodmultis", "Tells player world MoodMultipliers.", this.tellMultipliers);
             helper.ConsoleCommands.Add("mm", "Tells player world MoodMultipliers.", this.tellMultipliers);
 
-            ModConfig config = helper.ReadConfig<ModConfig>();
-            wnd = new Random(config.seed);
-            Monitor.Log("Seed loaded.");
+            
 
         }
 
@@ -370,7 +369,7 @@ namespace MoodyPlanet
 
             if (Context.IsWorldReady)
             {
-                x = wnd.Next(1, 14);
+                x = wnd.Next(1, 12);
                 z = wnd.Next(1, 100);
                 a = wnd.Next(1, 100);
                 b = wnd.Next(1, 100);
@@ -539,6 +538,7 @@ namespace MoodyPlanet
             {
                 hashofm.RemoveRange(0, hashofm.Count);
                 blackhash.RemoveRange(0, blackhash.Count);
+                Monitor.Log($"Removed Monsters from List {blackhash.Count}, {hashofm.Count} ");
             }
         }
 
@@ -609,7 +609,7 @@ namespace MoodyPlanet
                     H.Speed = (int)(H.Speed * CMS[5]);
                     blackhash.Add(m.GetHashCode());
                     hashofm.Remove(m.GetHashCode());
-                    //Monitor.Log("-MOODY--PLANET-> Applied status changes to monsters in this location. <--DEBUG--");
+                    Monitor.Log("-MOODY--PLANET-> Applied status changes to monsters in this location. <--DEBUG--");
                 }
             }
 
@@ -618,6 +618,7 @@ namespace MoodyPlanet
 
         public void DisplayMood()
         {
+            Monitor.Log($"-MOODY--PLANET-> World Multis : Health: {CMS[0]}, Resilience: {CMS[1]}, Slipperiness: {CMS[2]}, ExperienceGained(All Skills): {CMS[3]}, Scale: {CMS[4]}, Speed: {CMS[5]}  <--DEBUG--");
             Monitor.Log($"-MOODY--PLANET-> World Mood : {mood} <--DEBUG--");
             HUDMessage message = new HUDMessage($"The world is {mood} today!");
             message.color = new Color(218, 165, 32);
