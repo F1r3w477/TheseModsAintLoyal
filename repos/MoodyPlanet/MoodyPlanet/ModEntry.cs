@@ -71,7 +71,7 @@ namespace MoodyPlanet
             }
             
         }
-
+        
         private void tellMultipliers(string arg1, string[] arg2)
         {
             Monitor.Log($"Health: {CMS[0]}, Resilience: {CMS[1]}, Slipperiness: {CMS[2]}, ExperienceGained(All Skills): {CMS[3]}, Scale: {CMS[4]}, Speed: {CMS[5]} ");
@@ -589,15 +589,13 @@ namespace MoodyPlanet
 
                 foreach (NPC m in Game1.player.currentLocation.characters.OfType<NPC>())
                 {
-
+                    
                     if (m.IsMonster && !hashofm.Contains(m.GetHashCode()) && !blackhash.Contains(m.GetHashCode()))
                     {
                         hashofm.Add(m.GetHashCode());
                         y++;
-                        //Monitor.Log(m.Name);
-
-                    }
-
+                        
+                        }
 
 
                     //Monitor.Log(m.GetHashCode().ToString());
@@ -631,13 +629,14 @@ namespace MoodyPlanet
         public void rem_mons()
         {
 
-            foreach (NPC m in Game1.player.currentLocation.characters.OfType<NPC>())
+                foreach (NPC m in Game1.player.currentLocation.characters.OfType<NPC>())
 
             {
 
 
                 if (m.IsMonster && hashofm.Contains(m.GetHashCode()) && !blackhash.Contains(m.GetHashCode()))
                 {
+                    
                     Monster H = (m as Monster);
                     H.Health = (int)(H.Health * CMS[0]);
                     H.resilience.Value = (int)(H.resilience.Value * CMS[1]);
@@ -648,12 +647,19 @@ namespace MoodyPlanet
                     blackhash.Add(m.GetHashCode());
                     hashofm.Remove(m.GetHashCode());
                     if (mpdebug)
+                    {
                         Monitor.Log("-MOODY--PLANET-> Applied status changes to monsters in this location. <--DEBUG--");
+                        //Monitor.Log($"-MOODY--PLANET-> {H.Name} <--DEBUG--");
+                        //Monitor.Log($"-MOODY--PLANET-> {H.Health} <--DEBUG--");
+                    }
                 }
             }
 
 
         }
+
+
+
 
         public void DisplayMood()
         {
