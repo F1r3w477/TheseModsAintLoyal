@@ -44,10 +44,10 @@ namespace MoodyPlanet
             wnd = new Random();
             mpdebug = false;
 
-            TimeEvents.AfterDayStarted += TimeEvents_AfterDayStarted;
-            GameEvents.OneSecondTick += GameEvents_OneSecondTick;
-            TimeEvents.AfterDayStarted += TimeEvents_AfterDayStarted1;
-            GameEvents.FirstUpdateTick += GameEvents_FirstUpdateTick;
+            helper.Events.GameLoop.DayStarted += TimeEvents_AfterDayStarted;
+            helper.Events.GameLoop.OneSecondUpdateTicked += GameEvents_OneSecondTick;
+            helper.Events.GameLoop.DayStarted += TimeEvents_AfterDayStarted1;
+            helper.Events.GameLoop.GameLaunched += GameEvents_FirstUpdateTick;
             helper.ConsoleCommands.Add("mood", "Tells player world mood.", this.tellMood);
             helper.ConsoleCommands.Add("moodmultis", "Tells player world MoodMultipliers.", this.tellMultipliers);
             helper.ConsoleCommands.Add("mm", "Tells player world MoodMultipliers.", this.tellMultipliers);
@@ -77,7 +77,7 @@ namespace MoodyPlanet
             Monitor.Log($"Health: {CMS[0]}, Resilience: {CMS[1]}, Slipperiness: {CMS[2]}, ExperienceGained(All Skills): {CMS[3]}, Scale: {CMS[4]}, Speed: {CMS[5]} ");
         }
 
-        public double[] MoodMultis
+        public double[] MoodMultis //Mood Multipliers
         {
             get
             {
@@ -390,6 +390,7 @@ namespace MoodyPlanet
                 a = wnd.Next(1, 100);
                 b = wnd.Next(1, 100);
                 // 1 - Happy | 2 - Sad | 3 - Angry | 4 - Enlightened | 5 - Moody | 6 - Depressed | 7 - Elated | 8 - Dying | 9 - Furious
+                // Each mood has variants which are stronger or weaker
                 if (x == 1 && z == 1 && b == 1 && a == 1)
                 {
                     mood = "Holy shit just sleep again.";
