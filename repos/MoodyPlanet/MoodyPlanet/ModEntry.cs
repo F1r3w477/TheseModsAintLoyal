@@ -51,7 +51,7 @@ namespace MoodyPlanet
             helper.ConsoleCommands.Add("mood", "Tells player world mood.", this.tellMood);
             helper.ConsoleCommands.Add("moodmultis", "Tells player world MoodMultipliers.", this.tellMultipliers);
             helper.ConsoleCommands.Add("mm", "Tells player world MoodMultipliers.", this.tellMultipliers);
-            helper.ConsoleCommands.Add("mpdebug", "Tells player world MoodMultipliers.", this.MPDebug);
+            helper.ConsoleCommands.Add("mpdebug", "Turns debug on and off", this.MPDebug);
 
 
 
