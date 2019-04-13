@@ -385,7 +385,7 @@ namespace MoodyPlanet
 
             if (Context.IsWorldReady)
             {
-                x = wnd.Next(1, 12);
+                x = wnd.Next(1, 12); 
                 z = wnd.Next(1, 100);
                 a = wnd.Next(1, 100);
                 b = wnd.Next(1, 100);
