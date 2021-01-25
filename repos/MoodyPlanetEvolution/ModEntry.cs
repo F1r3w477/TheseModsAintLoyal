@@ -54,37 +54,37 @@ namespace MoodyPlanetEvolution
             helper.ConsoleCommands.Add("mm", "Tells player world MoodMultipliers.", this.tellMultipliers);
             helper.ConsoleCommands.Add("mpdebug", "Turns debug on and off", this.MPDebug);
 
-            Moods.Add(new Mood("Happy", ws[0], new double[] { 1.0, 1.0, 1.0, 1.1, 1.0, 1.0 }, -1.0, Color.Green, MP));                          //T1
+            Moods.Add(new Mood("Happy", ws[0], new double[] { 1.0, 1.0, 1.0, 1.1, 1.0, 1.0 }, -1.0, Color.Green, MP));                                   //T1
             Moods.Add(new Mood("Content", ws[1], new double[] { 1.0, 1.0, 1.0, 1.2, 1.0, 1.0 }, -1.0, Color.CornflowerBlue, MP));                        //T2
-            Moods.Add(new Mood("Untroubled", ws[2], new double[] { 0.85, 0.9, 1.0, 1.25, 1.0, 1.0 }, -1.0, Color.Purple, MP));                   //T3
-            Moods.Add(new Mood("Sad", ws[0], new double[] { 1.0, 1.0, 1.0, 1.1, 1.0, 1.0 }, -1.0, Color.Green, MP));                            //T1
+            Moods.Add(new Mood("Untroubled", ws[2], new double[] { 0.85, 0.9, 1.0, 1.25, 1.0, 1.0 }, -1.0, Color.Purple, MP));                           //T3
+            Moods.Add(new Mood("Sad", ws[0], new double[] { 1.0, 1.0, 1.0, 1.1, 1.0, 1.0 }, -1.0, Color.Green, MP));                                     //T1
             Moods.Add(new Mood("Gloomy", ws[1], new double[] { 1.0, 1.0, 1.0, 0.9, 1.0, 1.0 }, -1.0, Color.CornflowerBlue, MP));                         //T2
-            Moods.Add(new Mood("Depressed", ws[2], new double[] { 1.0, 1.0, 1.0, 0.65, 0.85, 0.8 }, -1.0, Color.Purple, MP));                    //T3
-            Moods.Add(new Mood("Annoyed", ws[0], new double[] { 1.8, 2.0, 1.85, 2.2, 1.0, 1.25 }, -1.0, Color.Green, MP));                      //T1
+            Moods.Add(new Mood("Depressed", ws[2], new double[] { 1.0, 1.0, 1.0, 0.65, 0.85, 0.8 }, -1.0, Color.Purple, MP));                            //T3
+            Moods.Add(new Mood("Annoyed", ws[0], new double[] { 1.8, 2.0, 1.85, 2.2, 1.0, 1.25 }, -1.0, Color.Green, MP));                               //T1
             Moods.Add(new Mood("Angry", ws[1], new double[] { 2.0, 3.0, 2.0, 2.45, 1.25, 1.75 }, -1.0, Color.CornflowerBlue, MP));                       //T2
-            Moods.Add(new Mood("Furious", ws[2], new double[] { 2.5, 4.25, 2.0, 2.75, 1.5, 2.0 }, -1.0, Color.Purple, MP));                      //T3
-            Moods.Add(new Mood("Mellow", ws[0], new double[] { 1.0, 0.9, 1.0, 1.15, 1.0, 0.9 }, -1.0, Color.Green, MP));                        //T1
+            Moods.Add(new Mood("Furious", ws[2], new double[] { 2.5, 4.25, 2.0, 2.75, 1.5, 2.0 }, -1.0, Color.Purple, MP));                              //T3
+            Moods.Add(new Mood("Mellow", ws[0], new double[] { 1.0, 0.9, 1.0, 1.15, 1.0, 0.9 }, -1.0, Color.Green, MP));                                 //T1
             Moods.Add(new Mood("Serene", ws[1], new double[] { 0.95, 0.8, 1.0, 1.25, 1.68, 1.8 }, -1.0, Color.CornflowerBlue, MP));                      //T2
-            Moods.Add(new Mood("Enlightned", ws[2], new double[] { 0.85, 0.75, 0.9, 1.45, 1.0, 0.9 }, -1.0, Color.Purple, MP));                  //T3
-            Moods.Add(new Mood("Indifferent", ws[0], new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 }, -1.0, Color.Green, MP));                    //T1
+            Moods.Add(new Mood("Enlightned", ws[2], new double[] { 0.85, 0.75, 0.9, 1.45, 1.0, 0.9 }, -1.0, Color.Purple, MP));                          //T3
+            Moods.Add(new Mood("Indifferent", ws[0], new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 }, -1.0, Color.Green, MP));                             //T1
             Moods.Add(new Mood("Uncaring", ws[1], new double[] { 1.0, 1.0, 1.0, 1.0, 1.25, 1.25 }, -1.0, Color.CornflowerBlue, MP));                     //T2
-            Moods.Add(new Mood("Uninterested", ws[2], new double[] { 1.0, 1.0, 1.0, 1.0, 2.0, 2.0 }, -1.0, Color.Purple, MP));                   //T3
-            Moods.Add(new Mood("Tired", ws[0], new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 0.85 }, -1.0, Color.Green, MP));                         //T1
+            Moods.Add(new Mood("Uninterested", ws[2], new double[] { 1.0, 1.0, 1.0, 1.0, 2.0, 2.0 }, -1.0, Color.Purple, MP));                           //T3
+            Moods.Add(new Mood("Tired", ws[0], new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 0.85 }, -1.0, Color.Green, MP));                                  //T1
             Moods.Add(new Mood("Restless", ws[1], new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 0.6 }, -1.0, Color.CornflowerBlue, MP));                       //T2
-            Moods.Add(new Mood("Anxious", ws[2], new double[] { 0.9, 0.9, 1.0, 1.0, 0.9, 0.5 }, -1.0, Color.Purple, MP));                        //T3
-            Moods.Add(new Mood("Loved", ws[0], new double[] { 1.0, 0.9, 1.0, 1.35, 1.0, 1.0 }, -1.0, Color.Green, MP));                         //T1
+            Moods.Add(new Mood("Anxious", ws[2], new double[] { 0.9, 0.9, 1.0, 1.0, 0.9, 0.5 }, -1.0, Color.Purple, MP));                                //T3
+            Moods.Add(new Mood("Loved", ws[0], new double[] { 1.0, 0.9, 1.0, 1.35, 1.0, 1.0 }, -1.0, Color.Green, MP));                                  //T1
             Moods.Add(new Mood("Cherished", ws[1], new double[] { 1.0, 0.75, 1.0, 1.65, 1.0, 1.0 }, -1.0, Color.CornflowerBlue, MP));                    //T2
-            Moods.Add(new Mood("Adored", ws[2], new double[] { 1.0, 0.2, 1.0, 1.95, 1.0, 1.0 }, -1.0, Color.Purple, MP));                        //T3
-            Moods.Add(new Mood("Mysterious", ws[0], new double[] { -1.0, -1.0, -1.0, -1.0, -1.0, -1.0 }, -1.0, Color.Green, MP));               //T1
+            Moods.Add(new Mood("Adored", ws[2], new double[] { 1.0, 0.2, 1.0, 1.95, 1.0, 1.0 }, -1.0, Color.Purple, MP));                                //T3
+            Moods.Add(new Mood("Mysterious", ws[0], new double[] { -1.0, -1.0, -1.0, -1.0, -1.0, -1.0 }, -1.0, Color.Green, MP));                        //T1
             Moods.Add(new Mood("Cryptic", ws[1], new double[] { -1.0, -1.0, -1.0, -1.0, -1.0, -1.0 }, -1.0, Color.CornflowerBlue, MP));                  //T2
-            Moods.Add(new Mood("Unexplainable", ws[2], new double[] { -1.0, -1.0, -1.0, -1.0, -1.0, -1.0 }, -1.0, Color.Purple, MP));            //T3
-            Moods.Add(new Mood("Arrogant", ws[0], new double[] { 4.0, 0.9, 1.0, 2.3, 1.0, 1.0 }, -1.0, Color.Green, MP));                       //T1
+            Moods.Add(new Mood("Unexplainable", ws[2], new double[] { -1.0, -1.0, -1.0, -1.0, -1.0, -1.0 }, -1.0, Color.Purple, MP));                    //T3
+            Moods.Add(new Mood("Arrogant", ws[0], new double[] { 4.0, 0.9, 1.0, 2.3, 1.0, 1.0 }, -1.0, Color.Green, MP));                                //T1
             Moods.Add(new Mood("Narcissistic", ws[1], new double[] { 6.0, 0.7, 1.0, 2.6, 1.0, 1.0 }, -1.0, Color.CornflowerBlue, MP));                   //T2
-            Moods.Add(new Mood("Egotistical", ws[2], new double[] { 9.0, 0.6, 1.0, 3.0, 1.15, 1.15 }, -1.0, Color.Purple, MP));                  //T3
-            Moods.Add(new Mood("Crazy", ws[0], new double[] { 3.5, 1.85, 1.5, 3.3, 1.0, 1.8 }, -1.0, Color.Green, MP));                         //T1
+            Moods.Add(new Mood("Egotistical", ws[2], new double[] { 9.0, 0.6, 1.0, 3.0, 1.15, 1.15 }, -1.0, Color.Purple, MP));                          //T3
+            Moods.Add(new Mood("Crazy", ws[0], new double[] { 3.5, 1.85, 1.5, 3.3, 1.0, 1.8 }, -1.0, Color.Green, MP));                                  //T1
             Moods.Add(new Mood("Irrational", ws[1], new double[] { 5.0, 2.9, 2.0, 4.65, 1.65, 2.3 }, -1.0, Color.CornflowerBlue, MP));                   //T2
-            Moods.Add(new Mood("Insane", ws[2], new double[] { 6.0, 4.0, 2.0, 6.0, 2.0, 2.6 }, -1.0, Color.Purple, MP));                         //T3
-            Moods.Add(new Mood("Holy shit just sleep again.", ws[3], new double[] { 15.0, 10.0, 4.0, 40.0, 3.0, 3.0 }, -1.0, Color.Black, MP)); //T10
+            Moods.Add(new Mood("Insane", ws[2], new double[] { 6.0, 4.0, 2.0, 6.0, 2.0, 2.6 }, -1.0, Color.Purple, MP));                                 //T3
+            Moods.Add(new Mood("Holy shit just sleep again.", ws[3], new double[] { 15.0, 10.0, 4.0, 40.0, 3.0, 3.0 }, -1.0, Color.Black, MP));          //T9
 
             foreach (Mood m in Moods)
             {
