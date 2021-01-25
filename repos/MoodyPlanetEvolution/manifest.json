@@ -9,7 +9,7 @@
   "UpdateKeys": [ "Nexus:2830" ],
   "Dependencies": [
     {
-      "UniqueID": "DevinLematty.LevelExtender",
+      "UniqueID": "Unidarkshin.LevelExtender",
       "IsRequired": true
     }
   ]

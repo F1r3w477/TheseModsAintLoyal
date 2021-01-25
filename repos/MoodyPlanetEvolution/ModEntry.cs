@@ -43,17 +43,55 @@ namespace MoodyPlanetEvolution
             blackhash = new List<int>();
             wnd = new Random();
             mpdebug = false;
+            moods = new List<double[]>();
+            multis = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
             helper.Events.GameLoop.DayStarted += TimeEvents_AfterDayStarted;
             helper.Events.GameLoop.OneSecondUpdateTicked += GameEvents_OneSecondTick;
             helper.Events.GameLoop.GameLaunched += GameEvents_FirstUpdateTick;
+
             helper.ConsoleCommands.Add("mood", "Tells player world mood.", this.tellMood);
             helper.ConsoleCommands.Add("moodmultis", "Tells player world MoodMultipliers.", this.tellMultipliers);
             helper.ConsoleCommands.Add("mm", "Tells player world MoodMultipliers.", this.tellMultipliers);
             helper.ConsoleCommands.Add("mpdebug", "Turns debug on and off", this.MPDebug);
 
+            setvals();
 
+        }
 
+        private void setvals()
+        {
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.1, 1.0, 1.0 });
+            L.Add("Content", new double[] { 1.0, 1.0, 1.0, 1.2, 1.0, 1.0 });
+            L.Add("Untroubled", new double[] { 0.85, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
+            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
         }
 
         private void MPDebug(string arg1, string[] arg2)
@@ -75,6 +113,13 @@ namespace MoodyPlanetEvolution
         {
             Monitor.Log($"Health: {CMS[0]}, Resilience: {CMS[1]}, Slipperiness: {CMS[2]}, ExperienceGained(All Skills): {CMS[3]}, Scale: {CMS[4]}, Speed: {CMS[5]} ");
         }
+
+        public List<double[]> moods;
+        public double[] multis;
+        public string[] moodRef = new string[] { "Happy", "Content", "Untroubled", "Sad", "Gloomy", "Depressed", "Annoyed", "Angry", "Furious",
+        "Mellow", "Serene", "Enlightened", "Indifferent", "Uncaring", "Uninterested", "Tired", "Restless", "Anxious", "Loved", "Cherished", "Adored",
+        "Mysterious", "Cryptic", "Unexplainable", "Arrogant", "Narcissistic", "Egotistical"};
+        Dictionary<string, double[]> L = new Dictionary<string, double[]>();
 
         public double[] MoodMultis //Mood Multipliers
         {
@@ -564,9 +609,9 @@ namespace MoodyPlanetEvolution
 
         private void GameEvents_FirstUpdateTick(object sender, EventArgs e)
         {
-            if (this.Helper.ModRegistry.IsLoaded("DevinLematty.LevelExtender"))
+            if (this.Helper.ModRegistry.IsLoaded("Unidarkshin.LevelExtender"))
             {
-                api = this.Helper.ModRegistry.GetApi<LEModApi>("DevinLematty.LevelExtender");
+                api = this.Helper.ModRegistry.GetApi<LEModApi>("Unidarkshin.LevelExtender");
             }
 
         }
@@ -608,6 +653,7 @@ namespace MoodyPlanetEvolution
                 {
                     if (alpha != y)
                     {
+                        Monitor.Log("RemMons");
                         alpha = y;
                         rem_mons();
                     }
@@ -634,8 +680,10 @@ namespace MoodyPlanetEvolution
 
                 if (m.IsMonster && hashofm.Contains(m.GetHashCode()) && !blackhash.Contains(m.GetHashCode()))
                 {
-
                     Monster H = (m as Monster);
+                    Monitor.Log($"-MOODY-p-PLANET-> {H.Name} <--DEBUG--");
+                    Monitor.Log($"-MOODY-p-PLANET-> {H.Health} * {CMS[0]} <--DEBUG--");
+                    H.Name += "MP";
                     H.Health = (int)(H.Health * CMS[0]);
                     H.resilience.Value = (int)(H.resilience.Value * CMS[1]);
                     H.Slipperiness = (int)(H.Slipperiness * CMS[2]);
@@ -647,8 +695,8 @@ namespace MoodyPlanetEvolution
                     if (mpdebug)
                     {
                         Monitor.Log("-MOODY--PLANET-> Applied status changes to monsters in this location. <--DEBUG--");
-                        //Monitor.Log($"-MOODY--PLANET-> {H.Name} <--DEBUG--");
-                        //Monitor.Log($"-MOODY--PLANET-> {H.Health} <--DEBUG--");
+                        Monitor.Log($"-MOODY--PLANET-> {H.Name} <--DEBUG--");
+                        Monitor.Log($"-MOODY--PLANET-> {H.Health} <--DEBUG--");
                     }
                 }
             }
