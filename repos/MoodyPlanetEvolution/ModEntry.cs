@@ -27,8 +27,8 @@ namespace MoodyPlanetEvolution
         public static Mod instance;
         public Random wnd;
         int alpha = -1;
-        List<int> hashofm;
-        List<int> blackhash;
+        public List<int> hashofm;
+        public List<int> blackhash;
         public Mood mood;
         LEModApi api;
         bool mpdebug;
@@ -197,7 +197,6 @@ namespace MoodyPlanetEvolution
                 {
                     if (alpha != y)
                     {
-                        Monitor.Log("RemMons");
                         alpha = y;
                         rem_mons();
                     }
