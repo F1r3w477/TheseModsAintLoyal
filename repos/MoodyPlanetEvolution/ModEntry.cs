@@ -92,7 +92,6 @@ namespace MoodyPlanetEvolution
             }
         }
 
-
         private void MPDebug(string arg1, string[] arg2)
         {
             if (mpdebug)
@@ -113,7 +112,6 @@ namespace MoodyPlanetEvolution
             Monitor.Log($"Health: {mood.modifiers[0]}, Resilience: {mood.modifiers[1]}, Slipperiness: {mood.modifiers[2]}, Combat XP Bonus: {mood.modifiers[3]}, " +
                 $"Scale: {mood.modifiers[4]}, Speed: {mood.modifiers[5]} ");
         }
-
 
         private void TimeEvents_AfterDayStarted(object sender, EventArgs e)
         {
@@ -171,8 +169,6 @@ namespace MoodyPlanetEvolution
         private void tellMood(string command, string[] args)
         {
             this.Monitor.Log(mood.name);
-
-
         }
 
         private void GameEvents_OneSecondTick(object sender, EventArgs e)
@@ -191,10 +187,6 @@ namespace MoodyPlanetEvolution
                         y++;
 
                     }
-
-
-                    //Monitor.Log(m.GetHashCode().ToString());
-
 
                 }
                 if (alpha == -1)
@@ -215,13 +207,8 @@ namespace MoodyPlanetEvolution
                     }
                 }
             }
-
-            /* foreach (int mhash in hashofm)
-            {
-                Monitor.Log($"--Hashes-->{mhash.ToString()}");
-            }
-            */
         }
+
         public void rem_mons()
         {
 
@@ -252,9 +239,6 @@ namespace MoodyPlanetEvolution
 
 
         }
-
-
-
 
         public void DisplayMood()
         {
@@ -289,9 +273,6 @@ namespace MoodyPlanetEvolution
             this.spawnRate = spawnRate;
             this.moodColor = moodColor;
             this.MP = MP;
-
-
-            
         }
 
         public void randomizedModifiers(double rate) 
