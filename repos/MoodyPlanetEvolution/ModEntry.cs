@@ -25,26 +25,25 @@ namespace MoodyPlanetEvolution
     public class ModEntry : Mod
     {
         public static Mod instance;
-        public static Random wnd;
-        int x, z, a, b; //becomes random 
+        public Random wnd;
         int alpha = -1;
         List<int> hashofm;
         List<int> blackhash;
-        string mood;
+        public Mood mood;
         LEModApi api;
-        public double[] CMS;
         bool mpdebug;
-
-
+        List<Mood> Moods = new List<Mood>();
+        int[] ws = new int[] {700, 250, 45, 5 };
+        public ModEntry MP;
+        public int totalWeight = 0;
         public override void Entry(IModHelper helper)
         {
             instance = this;
+            MP = this;
             hashofm = new List<int>();
             blackhash = new List<int>();
             wnd = new Random();
             mpdebug = false;
-            moods = new List<double[]>();
-            multis = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
             helper.Events.GameLoop.DayStarted += TimeEvents_AfterDayStarted;
             helper.Events.GameLoop.OneSecondUpdateTicked += GameEvents_OneSecondTick;
@@ -55,44 +54,44 @@ namespace MoodyPlanetEvolution
             helper.ConsoleCommands.Add("mm", "Tells player world MoodMultipliers.", this.tellMultipliers);
             helper.ConsoleCommands.Add("mpdebug", "Turns debug on and off", this.MPDebug);
 
-            setvals();
+            Moods.Add(new Mood("Happy", ws[0], new double[] { 1.0, 1.0, 1.0, 1.1, 1.0, 1.0 }, -1.0, Color.Green, MP));                          //T1
+            Moods.Add(new Mood("Content", ws[1], new double[] { 1.0, 1.0, 1.0, 1.2, 1.0, 1.0 }, -1.0, Color.CornflowerBlue, MP));                        //T2
+            Moods.Add(new Mood("Untroubled", ws[2], new double[] { 0.85, 0.9, 1.0, 1.25, 1.0, 1.0 }, -1.0, Color.Purple, MP));                   //T3
+            Moods.Add(new Mood("Sad", ws[0], new double[] { 1.0, 1.0, 1.0, 1.1, 1.0, 1.0 }, -1.0, Color.Green, MP));                            //T1
+            Moods.Add(new Mood("Gloomy", ws[1], new double[] { 1.0, 1.0, 1.0, 0.9, 1.0, 1.0 }, -1.0, Color.CornflowerBlue, MP));                         //T2
+            Moods.Add(new Mood("Depressed", ws[2], new double[] { 1.0, 1.0, 1.0, 0.65, 0.85, 0.8 }, -1.0, Color.Purple, MP));                    //T3
+            Moods.Add(new Mood("Annoyed", ws[0], new double[] { 1.8, 2.0, 1.85, 2.2, 1.0, 1.25 }, -1.0, Color.Green, MP));                      //T1
+            Moods.Add(new Mood("Angry", ws[1], new double[] { 2.0, 3.0, 2.0, 2.45, 1.25, 1.75 }, -1.0, Color.CornflowerBlue, MP));                       //T2
+            Moods.Add(new Mood("Furious", ws[2], new double[] { 2.5, 4.25, 2.0, 2.75, 1.5, 2.0 }, -1.0, Color.Purple, MP));                      //T3
+            Moods.Add(new Mood("Mellow", ws[0], new double[] { 1.0, 0.9, 1.0, 1.15, 1.0, 0.9 }, -1.0, Color.Green, MP));                        //T1
+            Moods.Add(new Mood("Serene", ws[1], new double[] { 0.95, 0.8, 1.0, 1.25, 1.68, 1.8 }, -1.0, Color.CornflowerBlue, MP));                      //T2
+            Moods.Add(new Mood("Enlightned", ws[2], new double[] { 0.85, 0.75, 0.9, 1.45, 1.0, 0.9 }, -1.0, Color.Purple, MP));                  //T3
+            Moods.Add(new Mood("Indifferent", ws[0], new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 }, -1.0, Color.Green, MP));                    //T1
+            Moods.Add(new Mood("Uncaring", ws[1], new double[] { 1.0, 1.0, 1.0, 1.0, 1.25, 1.25 }, -1.0, Color.CornflowerBlue, MP));                     //T2
+            Moods.Add(new Mood("Uninterested", ws[2], new double[] { 1.0, 1.0, 1.0, 1.0, 2.0, 2.0 }, -1.0, Color.Purple, MP));                   //T3
+            Moods.Add(new Mood("Tired", ws[0], new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 0.85 }, -1.0, Color.Green, MP));                         //T1
+            Moods.Add(new Mood("Restless", ws[1], new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 0.6 }, -1.0, Color.CornflowerBlue, MP));                       //T2
+            Moods.Add(new Mood("Anxious", ws[2], new double[] { 0.9, 0.9, 1.0, 1.0, 0.9, 0.5 }, -1.0, Color.Purple, MP));                        //T3
+            Moods.Add(new Mood("Loved", ws[0], new double[] { 1.0, 0.9, 1.0, 1.35, 1.0, 1.0 }, -1.0, Color.Green, MP));                         //T1
+            Moods.Add(new Mood("Cherished", ws[1], new double[] { 1.0, 0.75, 1.0, 1.65, 1.0, 1.0 }, -1.0, Color.CornflowerBlue, MP));                    //T2
+            Moods.Add(new Mood("Adored", ws[2], new double[] { 1.0, 0.2, 1.0, 1.95, 1.0, 1.0 }, -1.0, Color.Purple, MP));                        //T3
+            Moods.Add(new Mood("Mysterious", ws[0], new double[] { -1.0, -1.0, -1.0, -1.0, -1.0, -1.0 }, -1.0, Color.Green, MP));               //T1
+            Moods.Add(new Mood("Cryptic", ws[1], new double[] { -1.0, -1.0, -1.0, -1.0, -1.0, -1.0 }, -1.0, Color.CornflowerBlue, MP));                  //T2
+            Moods.Add(new Mood("Unexplainable", ws[2], new double[] { -1.0, -1.0, -1.0, -1.0, -1.0, -1.0 }, -1.0, Color.Purple, MP));            //T3
+            Moods.Add(new Mood("Arrogant", ws[0], new double[] { 4.0, 0.9, 1.0, 2.3, 1.0, 1.0 }, -1.0, Color.Green, MP));                       //T1
+            Moods.Add(new Mood("Narcissistic", ws[1], new double[] { 6.0, 0.7, 1.0, 2.6, 1.0, 1.0 }, -1.0, Color.CornflowerBlue, MP));                   //T2
+            Moods.Add(new Mood("Egotistical", ws[2], new double[] { 9.0, 0.6, 1.0, 3.0, 1.15, 1.15 }, -1.0, Color.Purple, MP));                  //T3
+            Moods.Add(new Mood("Crazy", ws[0], new double[] { 3.5, 1.85, 1.5, 3.3, 1.0, 1.8 }, -1.0, Color.Green, MP));                         //T1
+            Moods.Add(new Mood("Irrational", ws[1], new double[] { 5.0, 2.9, 2.0, 4.65, 1.65, 2.3 }, -1.0, Color.CornflowerBlue, MP));                   //T2
+            Moods.Add(new Mood("Insane", ws[2], new double[] { 6.0, 4.0, 2.0, 6.0, 2.0, 2.6 }, -1.0, Color.Purple, MP));                         //T3
+            Moods.Add(new Mood("Holy shit just sleep again.", ws[3], new double[] { 15.0, 10.0, 4.0, 40.0, 3.0, 3.0 }, -1.0, Color.Black, MP)); //T10
 
+            foreach (Mood m in Moods)
+            {
+                totalWeight = m.weight + totalWeight;
+            }
         }
 
-        private void setvals()
-        {
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.1, 1.0, 1.0 });
-            L.Add("Content", new double[] { 1.0, 1.0, 1.0, 1.2, 1.0, 1.0 });
-            L.Add("Untroubled", new double[] { 0.85, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-            L.Add("Happy", new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 });
-        }
 
         private void MPDebug(string arg1, string[] arg2)
         {
@@ -111,318 +110,10 @@ namespace MoodyPlanetEvolution
 
         private void tellMultipliers(string arg1, string[] arg2)
         {
-            Monitor.Log($"Health: {CMS[0]}, Resilience: {CMS[1]}, Slipperiness: {CMS[2]}, ExperienceGained(All Skills): {CMS[3]}, Scale: {CMS[4]}, Speed: {CMS[5]} ");
+            Monitor.Log($"Health: {mood.modifiers[0]}, Resilience: {mood.modifiers[1]}, Slipperiness: {mood.modifiers[2]}, Combat XP Bonus: {mood.modifiers[3]}, " +
+                $"Scale: {mood.modifiers[4]}, Speed: {mood.modifiers[5]} ");
         }
 
-        public List<double[]> moods;
-        public double[] multis;
-        public string[] moodRef = new string[] { "Happy", "Content", "Untroubled", "Sad", "Gloomy", "Depressed", "Annoyed", "Angry", "Furious",
-        "Mellow", "Serene", "Enlightened", "Indifferent", "Uncaring", "Uninterested", "Tired", "Restless", "Anxious", "Loved", "Cherished", "Adored",
-        "Mysterious", "Cryptic", "Unexplainable", "Arrogant", "Narcissistic", "Egotistical"};
-        Dictionary<string, double[]> L = new Dictionary<string, double[]>();
-
-        public double[] MoodMultis //Mood Multipliers
-        {
-            get
-            {
-                double he = 1.0;
-                double res = 1.0;
-                double sl = 1.0;
-                double exp = 1.0;
-                double sc = 1.0;
-                double sp = 1.0;
-                if (mood == "Happy")
-                {
-                    he = 1.0;
-                    res = 1.0;
-                    sl = 1.0;
-                    exp = 1.1;
-                    sc = 1.0;
-                    sp = 1.0;
-                }
-                else if (mood == "Content")
-                {
-                    he = 1.0;
-                    res = 1.0;
-                    sl = 1.0;
-                    exp = 1.2;
-                    sc = 1.0;
-                    sp = 1.0;
-                }
-                else if (mood == "Untroubled")
-                {
-                    he = 0.85;
-                    res = 0.9;
-                    sl = 1.0;
-                    exp = 1.25;
-                    sc = 1.0;
-                    sp = 1.0;
-                }
-                else if (mood == "Sad")
-                {
-                    he = 1.0;
-                    res = 1.0;
-                    sl = 1.0;
-                    exp = 0.9;
-                    sc = 1.0;
-                    sp = 1.0;
-                }
-                else if (mood == "Gloomy")
-                {
-                    he = 1.0;
-                    res = 0.8;
-                    sl = 1.0;
-                    exp = 1.0;
-                    sc = 1.0;
-                    sp = 1.0;
-                }
-                else if (mood == "Depressed")
-                {
-                    he = 1.0;
-                    res = 1.0;
-                    sl = 1.0;
-                    exp = 0.65;
-                    sc = 0.85;
-                    sp = 0.8;
-                }
-                else if (mood == "Annoyed")
-                {
-                    he = 1.8;
-                    res = 2.0;
-                    sl = 1.85;
-                    exp = 2.2;
-                    sc = 1.0;
-                    sp = 1.25;
-                }
-                else if (mood == "Angry")
-                {
-                    he = 2.0;
-                    res = 3.0;
-                    sl = 2.0;
-                    exp = 2.45;
-                    sc = 1.25;
-                    sp = 1.75;
-                }
-                else if (mood == "Furious")
-                {
-                    he = 2.5;
-                    res = 4.25;
-                    sl = 2.0;
-                    exp = 2.75;
-                    sc = 1.5;
-                    sp = 2.0;
-                }
-                else if (mood == "Mellow")
-                {
-                    he = 1.0;
-                    res = 0.9;
-                    sl = 1.0;
-                    exp = 1.15;
-                    sc = 1.0;
-                    sp = 0.9;
-                }
-                else if (mood == "Serene")
-                {
-                    he = 0.95;
-                    res = 0.8;
-                    sl = 1.0;
-                    exp = 1.25;
-                    sc = 1.68;
-                    sp = 1.8;
-                }
-                else if (mood == "Enlightened")
-                {
-                    he = 0.85;
-                    res = 0.75;
-                    sl = 0.9;
-                    exp = 1.45;
-                    sc = 1.0;
-                    sp = 0.9;
-                }
-                else if (mood == "Indifferent")
-                {
-                    he = 1.0;
-                    res = 1.0;
-                    sl = 1.0;
-                    exp = 1.0;
-                    sc = 1.0;
-                    sp = 1.0;
-                }
-                else if (mood == "Uncaring")
-                {
-                    he = 1.0;
-                    res = 1.0;
-                    sl = 1.0;
-                    exp = 1.0;
-                    sc = 1.25;
-                    sp = 1.25;
-                }
-                else if (mood == "Uninterested")
-                {
-                    he = 1.0;
-                    res = 1.0;
-                    sl = 1.0;
-                    exp = 1.0;
-                    sc = 2.0;
-                    sp = 2.0;
-                }
-                else if (mood == "Tired")
-                {
-                    he = 1.0;
-                    res = 1.0;
-                    sl = 1.0;
-                    exp = 1.0;
-                    sc = 1.0;
-                    sp = 0.85;
-                }
-                else if (mood == "Restless")
-                {
-                    he = 1.0;
-                    res = 1.0;
-                    sl = 1.0;
-                    exp = 1.0;
-                    sc = 1.0;
-                    sp = 0.6;
-                }
-                else if (mood == "Anxious")
-                {
-                    he = 0.9;
-                    res = 0.9;
-                    sl = 1.0;
-                    exp = 1.0;
-                    sc = 0.9;
-                    sp = 0.5;
-                }
-                else if (mood == "Loved")
-                {
-                    he = 1.0;
-                    res = 0.9;
-                    sl = 1.0;
-                    exp = 1.35;
-                    sc = 1.0;
-                    sp = 1.0;
-                }
-                else if (mood == "Cherished")
-                {
-                    he = 1.0;
-                    res = 0.75;
-                    sl = 1.0;
-                    exp = 1.65;
-                    sc = 1.0;
-                    sp = 1.0;
-                }
-                else if (mood == "Adored")
-                {
-                    he = 1.0;
-                    res = 0.2;
-                    sl = 1.0;
-                    exp = 1.95;
-                    sc = 1.0;
-                    sp = 1.0;
-                }
-                else if (mood == "Mysterious")
-                {
-                    he = wnd.NextDouble() + 1.0;
-                    res = wnd.NextDouble() + 1.0;
-                    sl = wnd.NextDouble() + 1.0;
-                    exp = wnd.NextDouble() + 1.0;
-                    sc = wnd.NextDouble() + 1.0;
-                    sp = wnd.NextDouble() + 1.0;
-                }
-                else if (mood == "Cryptic")
-                {
-                    he = wnd.NextDouble() * 4;
-                    res = wnd.NextDouble() * 4;
-                    sl = wnd.NextDouble() * 4;
-                    exp = wnd.NextDouble() * 4;
-                    sc = wnd.NextDouble() * 4;
-                    sp = wnd.NextDouble() * 4;
-                }
-                else if (mood == "Unexplainable")
-                {
-                    he = wnd.NextDouble() * 6;
-                    res = wnd.NextDouble() * 6;
-                    sl = wnd.NextDouble() * 6;
-                    exp = wnd.NextDouble() * 6;
-                    sc = wnd.NextDouble() * 6;
-                    sp = wnd.NextDouble() * 6;
-                }
-                else if (mood == "Arrogant")
-                {
-                    he = 4.0;
-                    res = 0.9;
-                    sl = 1.0;
-                    exp = 2.3;
-                    sc = 1.0;
-                    sp = 1.0;
-                }
-                else if (mood == "Narcissistic")
-                {
-                    he = 6.0;
-                    res = 0.7;
-                    sl = 1.0;
-                    exp = 2.6;
-                    sc = 1.0;
-                    sp = 1.0;
-                }
-                else if (mood == "Egotistical")
-                {
-                    he = 9.0;
-                    res = 0.6;
-                    sl = 1.0;
-                    exp = 3.0;
-                    sc = 1.15;
-                    sp = 1.15;
-                }
-                else if (mood == "Crazy")
-                {
-                    he = 3.5;
-                    res = 1.85;
-                    sl = 1.5;
-                    exp = 3.3;
-                    sc = 1.0;
-                    sp = 1.8;
-                }
-                else if (mood == "Irrational")
-                {
-                    he = 5.0;
-                    res = 2.9;
-                    sl = 2.0;
-                    exp = 4.65;
-                    sc = 1.65;
-                    sp = 2.3;
-                }
-                else if (mood == "Insane")
-                {
-                    he = 6.0;
-                    res = 4.0;
-                    sl = 2.0;
-                    exp = 6.0;
-                    sc = 2.0;
-                    sp = 2.6;
-                }
-                else if (mood == "Holy shit just sleep again.")
-                {
-                    he = 15.0;
-                    res = 10.0;
-                    sl = 4.0;
-                    exp = 40.0;
-                    sc = 3.0;
-                    sp = 3.0;
-                }
-                else if (mood == "Normal")
-                {
-                    he = 1.0;
-                    res = 1.0;
-                    sl = 1.0;
-                    exp = 1.0;
-                    sc = 1.0;
-                    sp = 1.0;
-                }
-                double[] nutty = { he, res, sl, exp, sc, sp };
-                return nutty;
-            }
-        }
 
         private void TimeEvents_AfterDayStarted(object sender, EventArgs e)
         {
@@ -437,172 +128,33 @@ namespace MoodyPlanetEvolution
                         Monitor.Log($"-MOODY--PLANET->Removed Monsters from List ||| {blackhash.Count}, |/| {hashofm.Count} |||<--DEBUG--");
                 }
 
-                x = wnd.Next(1, 12);
-                z = wnd.Next(1, 100);
-                a = wnd.Next(1, 100);
-                b = wnd.Next(1, 100);
-                // 1 - Happy | 2 - Sad | 3 - Angry | 4 - Enlightened | 5 - Moody | 6 - Depressed | 7 - Elated | 8 - Dying | 9 - Furious
-                // Each mood has variants which are stronger or weaker
-                if (x == 1 && z == 1 && b == 1 && a == 1)
-                {
-                    mood = "Holy shit just sleep again.";
-                    double rnd = wnd.Next(40, 1000);
-                    rnd = rnd / 1000.0;
-                    api.Spawn_Rate(rnd);
-                }
-                if (x == 1 && z > 13 && z < 88)
-                {
-                    mood = "Happy";
-                    Game1.player.Stamina = (int)(Game1.player.Stamina * 1.1);
-                    Game1.player.health = (int)(Game1.player.health * 1.1);
-                }
-                else if (x == 1 && z > 87)
-                {
-                    mood = "Content";
-                    Game1.player.Stamina = (int)(Game1.player.Stamina * 1.1);
-                    Game1.player.health = (int)(Game1.player.health * 1.2);
+                int rnum = wnd.Next(0, totalWeight);
 
-                }
-                else if (x == 1 && z < 14)
+                foreach (Mood m in Moods)
                 {
-                    mood = "Untroubled";
-                    Game1.player.Stamina = (int)(Game1.player.Stamina * 1.25);
-                    Game1.player.health = (int)(Game1.player.health * 1.5);
+                    if (rnum < m.weight)
+                    {
+                        mood = m;
+                        break;
+                    }
+                    rnum = rnum - m.weight;
                 }
-                else if (x == 2 && z > 13 && z < 88)
+                if (mood.name == "Mysterious")
                 {
-                    mood = "Sad";
-                    Game1.player.Stamina = (int)(Game1.player.Stamina * .9);
+                    mood.randomizedModifiers(1.0);
                 }
-                else if (x == 2 && z < 14)
+                else if (mood.name == "Cryptic")
                 {
-                    mood = "Gloomy";
-                    Game1.player.Stamina = (int)(Game1.player.Stamina * .75);
-                    Game1.player.health = (int)(Game1.player.health * .9);
+                    mood.randomizedModifiers(4.0);
+                }
+                else if (mood.name == "Unexplainable")
+                {
+                    mood.randomizedModifiers(6.0);
                 }
 
-                else if (x == 2 && z > 87)
-                {
-                    mood = "Depressed";
-                    Game1.player.Stamina = (int)(Game1.player.Stamina * .5);
-                    Game1.player.health = (int)(Game1.player.health * .8);
-                }
-                else if (x == 3 && z > 13 && z < 88)
-                {
-                    mood = "Annoyed";
-                }
-                else if (x == 3 && z > 87)
-                {
-                    mood = "Angry";
-                }
-                else if (x == 3 && z < 14)
-                {
-                    mood = "Furious";
-                }
-                else if (x == 4 && z > 13 && z < 88)
-                {
-                    mood = "Mellow";
-                }
-                else if (x == 4 && z > 87)
-                {
-                    mood = "Serene";
-                }
-                else if (x == 4 && z < 14)
-                {
-                    mood = "Enlightened";
-                    Game1.player.health = (int)(Game1.player.health * 1.15);
-                    Game1.player.Stamina = (int)(Game1.player.Stamina * 1.25);
-                }
-                else if (x == 5 && z > 13 && z < 88)
-                {
-                    mood = "Indifferent";
-                }
-                else if (x == 5 && z > 87)
-                {
-                    mood = "Uncaring";
-                }
-                else if (x == 5 && z < 14)
-                {
-                    mood = "Uninterested";
-                }
-                else if (x == 6 && z > 13 && z < 88)
-                {
-                    mood = "Tired";
-                }
-                else if (x == 6 && z > 87)
-                {
-                    mood = "Restless";
-                }
-                else if (x == 6 && z < 14)
-                {
-                    mood = "Anxious";
-                }
-                else if (x == 7 && z > 13 && z < 88)
-                {
-                    mood = "Loved";
-                }
-                else if (x == 7 && z > 87)
-                {
-                    mood = "Cherished";
-                }
-                else if (x == 7 && z < 14)
-                {
-                    mood = "Adored";
-                }
-                else if (x == 8 && z > 13 && z < 88)
-                {
-                    mood = "Mysterious";
-                    double rnd = wnd.Next(0, 10);
-                    rnd = rnd / 1000.0;
-                    api.Spawn_Rate(rnd);
-                }
-                else if (x == 8 && z > 87)
-                {
-                    mood = "Cryptic";
-                    double rnd = wnd.Next(0, 23);
-                    rnd = rnd / 1000.0;
-                    api.Spawn_Rate(rnd);
-                }
-                else if (x == 8 && z < 14)
-                {
-                    mood = "Unexplainable";
-                    double rnd = wnd.Next(0, 33);
-                    rnd = rnd / 1000.0;
-                    api.Spawn_Rate(rnd);
-                }
-                else if (x == 9 && z > 13 && z < 88)
-                {
-                    mood = "Arrogant";
-                }
-                else if (x == 9 && z > 87)
-                {
-                    mood = "Narcissistic";
+                if (mood.spawnRate != -1.0)
+                    api.Spawn_Rate(mood.spawnRate);
 
-                }
-                else if (x == 9 && z < 14)
-                {
-                    mood = "Egotistical";
-                }
-                else if (x == 10 && z > 13 && z < 88)
-                {
-                    mood = "Crazy";
-                }
-                else if (x == 10 && z < 14)
-                {
-                    mood = "Irrational";
-                }
-                else if (x == 10)
-                {
-                    mood = "Insane";
-                    double rnd = wnd.Next(10, 45);
-                    rnd = rnd / 1000.0;
-                    api.Spawn_Rate(rnd);
-                }
-                else if (x > 10)
-                {
-                    mood = "Normal";
-                }
-                CMS = MoodMultis;
                 DisplayMood();
             }
         }
@@ -618,7 +170,7 @@ namespace MoodyPlanetEvolution
 
         private void tellMood(string command, string[] args)
         {
-            this.Monitor.Log(mood);
+            this.Monitor.Log(mood.name);
 
 
         }
@@ -681,15 +233,12 @@ namespace MoodyPlanetEvolution
                 if (m.IsMonster && hashofm.Contains(m.GetHashCode()) && !blackhash.Contains(m.GetHashCode()))
                 {
                     Monster H = (m as Monster);
-                    Monitor.Log($"-MOODY-p-PLANET-> {H.Name} <--DEBUG--");
-                    Monitor.Log($"-MOODY-p-PLANET-> {H.Health} * {CMS[0]} <--DEBUG--");
-                    H.Name += "MP";
-                    H.Health = (int)(H.Health * CMS[0]);
-                    H.resilience.Value = (int)(H.resilience.Value * CMS[1]);
-                    H.Slipperiness = (int)(H.Slipperiness * CMS[2]);
-                    H.ExperienceGained = (int)(H.ExperienceGained * CMS[3]);
-                    H.Scale = (int)(H.Scale * CMS[4]);
-                    H.Speed = (int)(H.Speed * CMS[5]);
+                    H.Health = (int)(H.Health * mood.modifiers[0]);
+                    H.resilience.Value = (int)(H.resilience.Value * mood.modifiers[1]);
+                    H.Slipperiness = (int)(H.Slipperiness * mood.modifiers[2]);
+                    H.ExperienceGained = (int)(H.ExperienceGained * mood.modifiers[3]);
+                    H.Scale = (int)(H.Scale * mood.modifiers[4]);
+                    H.Speed = (int)(H.Speed * mood.modifiers[5]);
                     blackhash.Add(m.GetHashCode());
                     hashofm.Remove(m.GetHashCode());
                     if (mpdebug)
@@ -711,20 +260,46 @@ namespace MoodyPlanetEvolution
         {
             if (mpdebug)
             {
-                Monitor.Log($"-MOODY--PLANET-> World Multis : Health: {CMS[0]}, Resilience: {CMS[1]}, Slipperiness: {CMS[2]}, ExperienceGained(All Skills): {CMS[3]}, Scale: {CMS[4]}, Speed: {CMS[5]}  <--DEBUG--");
-                Monitor.Log($"-MOODY--PLANET-> World Mood : {mood} <--DEBUG--");
+                Monitor.Log($"Health: {mood.modifiers[0]}, Resilience: {mood.modifiers[1]}, Slipperiness: {mood.modifiers[2]}, Combat XP Bonus: {mood.modifiers[3]}, " +
+                $"Scale: {mood.modifiers[4]}, Speed: {mood.modifiers[5]}  < --DEBUG--");
+                Monitor.Log($"-MOODY--PLANET-> World Mood : {mood.name} <--DEBUG--");
             }
-            HUDMessage message = new HUDMessage($"The world is {mood} today!");
-            message.color = new Color(218, 165, 32);
+            HUDMessage message = new HUDMessage($"The world is {mood.name} today!", mood.moodColor, 8000.0f);
             Game1.addHUDMessage(message);
-
-
-            message.timeLeft += 7000.0f;
             message.noIcon = true;
-
             message.update(Game1.currentGameTime);
         }
 
     }
 
+    public class Mood
+    {
+        public ModEntry MP;
+        public string name;
+        public int weight;
+        public double[] modifiers;
+        public double spawnRate;
+        public Color moodColor;
+
+        public Mood(string name, int weight, double[] modifiers, double spawnRate, Color moodColor, ModEntry MP)
+        {
+            this.name = name;
+            this.weight = weight;
+            this.modifiers = modifiers;
+            this.spawnRate = spawnRate;
+            this.moodColor = moodColor;
+            this.MP = MP;
+
+
+            
+        }
+
+        public void randomizedModifiers(double rate) 
+        {
+            for (int i = 0; i < modifiers.Length; i++)
+            {
+                modifiers[i] = Math.Round((MP.wnd.NextDouble() * rate) + 1.0, 3);
+            }
+        }
+    }
 }

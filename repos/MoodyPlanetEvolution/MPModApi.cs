@@ -16,7 +16,7 @@ namespace MoodyPlanetEvolution
         }
         public double Exp_Rate()
         {
-            return ME.CMS[3];
+            return ME.mood.modifiers[3];
         }
 
     }
