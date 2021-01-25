@@ -1,10 +1,10 @@
 {
   "Name": "MoodyPlanet",
   "Author": "Daniel McMenamy",
-  "Version": "1.1.1",
+  "Version": "1.5.3-v001",
   "Description": "The world has feelings too, you know?",
   "UniqueID": "f1r3w477.MoodyPlanet",
-  "EntryDll": "MoodyPlanet.dll",
+  "EntryDll": "MoodyPlanetEvolution.dll",
   "MinimumApiVersion": "3.7",
   "UpdateKeys": [ "Nexus:2830" ],
   "Dependencies": [
