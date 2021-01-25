@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace MoodyPlanetEvolution
 {
-    public class Class1
+    public interface LEModApi
     {
+        void Spawn_Rate(double osr);
     }
 }
